@@ -35,8 +35,8 @@ contract CellBoard{
  }
 
  function getColor(uint row, uint col) public view returns (uint){
-    if((row != 0) && (col != 0)) revert noZeroNumbers();
-    if((row < 6) && (col < 8)) revert rOrc_outOfBound();
+    if((row == 0) && (col == 0)) revert noZeroNumbers();
+    if((row >= 6) && (col >= 8)) revert rOrc_outOfBound();
      return cellB[row][col];
  }
 }
