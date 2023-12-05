@@ -43,8 +43,8 @@ Users can retrieve the color of a specific cell by calling the getColor function
 
 ```
 function getColor(uint row, uint col) public view returns (uint){
-    if((row != 0) && (col != 0)) revert noZeroNumbers();
-    if((row < 6) && (col < 8)) revert rOrc_outOfBound();
+    if((row == 0) && (col == 0)) revert noZeroNumbers();
+    if((row >= 6) && (col >= 8)) revert rOrc_outOfBound();
      return cellB[row][col];
  }
 ```
