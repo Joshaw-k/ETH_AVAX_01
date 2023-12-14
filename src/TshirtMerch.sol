@@ -28,7 +28,7 @@ contract TshirtMerch{
     owner = msg.sender;
  }
 
- function buyMerch(string calldata _color, uint _amount) public onlyOwner {
+ function buyMerch(string calldata _color, uint _amount) public {
    if(keccak256(abi.encode(_color)) == keccak256(abi.encode(""))){
       revert emptyColor();
    }
@@ -36,11 +36,12 @@ contract TshirtMerch{
       revert noZeroAmount();
    }
    merchandize.push(Merchandize({color:_color,amount:_amount}));
-   totalSold++;
+   totalSupply = totalSold - _amount;
+   totalSold = totalSold + _amount;
    assert(totalSold > 0);
  }
 
- function MerchSold() public view returns (Merchandize[] memory){
+ function MerchSold() public onlyOwner view returns (Merchandize[] memory){
     return merchandize;
  }
 }
